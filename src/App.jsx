@@ -49,7 +49,15 @@ function App() {
       <Navigation isConfigured={isConfigured} />
       <main className="container mx-auto px-4 py-8">
         <Routes>
-          <Route path="/" element={<Navigate to="/config" replace />} />
+          <Route 
+            path="/" 
+            element={
+              <Navigate 
+                to={isConfigured ? "/search" : "/config"} 
+                replace 
+              />
+            } 
+          />
           <Route 
             path="/config" 
             element={
@@ -62,16 +70,10 @@ function App() {
           <Route 
             path="/search" 
             element={
-              config ? (
+              isConfigured ? (
                 <RepoSearch config={config} />
               ) : (
-                <div className="alert-warning">
-                  <h3 className="font-semibold">Configuration Required</h3>
-                  <p>Please configure your API credentials first.</p>
-                  <a href="/config" className="text-blue-600 hover:underline">
-                    Go to Configuration
-                  </a>
-                </div>
+                <Navigate to="/config" replace />
               )
             } 
           />

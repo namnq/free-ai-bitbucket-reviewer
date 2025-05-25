@@ -6,7 +6,7 @@ import './styles/global.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/free-ai-bitbucket-reviewer">
       <App />
     </BrowserRouter>
   </React.StrictMode>,
