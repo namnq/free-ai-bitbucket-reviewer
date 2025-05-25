@@ -3,7 +3,7 @@ import { getPullRequests } from '../services/bitbucketApi'
 import { parseRepoFullName } from '../utils/auth'
 import PRListItem from './PRListItem.jsx'
 
-const PRList = ({ repo, config }) => {
+const PRList = ({ repo, config, onReady }) => {
   const [pullRequests, setPullRequests] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -25,6 +25,13 @@ const PRList = ({ repo, config }) => {
       fetchPullRequests(1, selectedState)
     }
   }, [repo, selectedState])
+
+  // Notify parent when data is loaded
+  useEffect(() => {
+    if (!loading && pullRequests.length >= 0 && onReady) {
+      onReady()
+    }
+  }, [loading, pullRequests, onReady])
 
   const fetchPullRequests = async (page = 1, state = selectedState) => {
     if (!repo) return

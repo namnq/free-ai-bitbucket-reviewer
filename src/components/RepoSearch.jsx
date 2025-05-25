@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { searchRepositories } from '../services/bitbucketApi'
 import RepoListItem from './RepoListItem.jsx'
 import PRList from './PRList.jsx'
@@ -15,6 +15,9 @@ const RepoSearch = ({ config }) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [hasSearched, setHasSearched] = useState(false)
+
+  // Ref for PR section
+  const prSectionRef = useRef(null)
 
   const handleSearch = async (page = 1) => {
     if (!searchTerm.trim()) {
@@ -51,8 +54,37 @@ const RepoSearch = ({ config }) => {
     }
   }
 
+  const scrollToPRSection = () => {
+    if (prSectionRef.current) {
+      prSectionRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  }
+
   const handleRepoSelect = (repo) => {
     setSelectedRepo(repo)
+  }
+
+  // Scroll to PR section when repo is selected
+  useEffect(() => {
+    if (selectedRepo && prSectionRef.current) {
+      // Longer delay to ensure PRList component is fully rendered and data is loading
+      const scrollTimer = setTimeout(() => {
+        scrollToPRSection()
+      }, 500)
+
+      return () => clearTimeout(scrollTimer)
+    }
+  }, [selectedRepo])
+
+  // Callback for when PRList is ready
+  const handlePRListReady = () => {
+    // Additional scroll when PR data is loaded
+    setTimeout(() => {
+      scrollToPRSection()
+    }, 100)
   }
 
   const handlePageChange = (newPage) => {
@@ -214,10 +246,13 @@ const RepoSearch = ({ config }) => {
 
       {/* Pull Requests Section */}
       {selectedRepo && (
-        <PRList 
-          repo={selectedRepo}
-          config={config}
-        />
+        <div ref={prSectionRef}>
+          <PRList 
+            repo={selectedRepo}
+            config={config}
+            onReady={handlePRListReady}
+          />
+        </div>
       )}
     </div>
   )

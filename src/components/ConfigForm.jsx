@@ -214,20 +214,69 @@ Do not include any text before or after the JSON. The entire response should be 
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto space-y-6">
+      
+      {/* Privacy & Security Notice */}
+      <div className="card bg-gradient-to-r from-green-50 to-blue-50 border-l-4 border-green-500">
+        <div className="card-body">
+          <div className="flex items-start space-x-3">
+            <div className="flex-shrink-0">
+              <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                🔒
+              </div>
+            </div>
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                🛡️ Privacy & Security Information
+              </h3>
+              <div className="grid md:grid-cols-2 gap-4 text-sm">
+                <div className="space-y-2">
+                  <div className="flex items-center space-x-2">
+                    <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                    <span className="font-medium text-gray-700">100% Local Storage</span>
+                  </div>
+                  <p className="text-gray-600 ml-4">
+                    All configurations are stored locally in your browser using IndexedDB. 
+                    No data is sent to external servers.
+                  </p>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center space-x-2">
+                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                    <span className="font-medium text-gray-700">Your Data, Your Control</span>
+                  </div>
+                  <p className="text-gray-600 ml-4">
+                    API keys and credentials never leave your browser. 
+                    You can clear all data anytime via browser settings.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Configuration Card */}
       <div className="card">
         <div className="card-header">
-          <h1 className="text-2xl font-bold text-gray-900">Configuration</h1>
-          <p className="text-gray-600 mt-1">
-            Configure your API credentials and review settings to start using the AI code reviewer.
-          </p>
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+              ⚙️
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">Configuration</h1>
+              <p className="text-gray-600 mt-1">
+                Configure your API credentials and review settings to start using the AI code reviewer.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className="card-body">
           {success && (
             <div className="alert-success mb-6">
-              <h3 className="font-semibold">Configuration Saved Successfully!</h3>
-              <p>You can now use the repository search to review pull requests.</p>
+              <h3 className="font-semibold">✅ Configuration Saved Successfully!</h3>
+              <p>Your settings have been saved locally. You can now use the repository search to review pull requests.</p>
             </div>
           )}
 
@@ -237,13 +286,18 @@ Do not include any text before or after the JSON. The entire response should be 
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-8">
 
             {/* Gemini API Configuration */}
             <div className="space-y-4">
-              <h2 className="text-lg font-semibold text-gray-900 border-b pb-2">
-                Gemini Flash API Configuration
-              </h2>
+              <div className="flex items-center space-x-3 pb-3 border-b">
+                <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                  🤖
+                </div>
+                <h2 className="text-lg font-semibold text-gray-900">
+                  Gemini Flash API Configuration
+                </h2>
+              </div>
 
               <div className="form-group">
                 <label htmlFor="llmToken" className="form-label">
@@ -303,9 +357,14 @@ Do not include any text before or after the JSON. The entire response should be 
 
             {/* Bitbucket API Configuration */}
             <div className="space-y-4">
-              <h2 className="text-lg font-semibold text-gray-900 border-b pb-2">
-                Bitbucket API Configuration
-              </h2>
+              <div className="flex items-center space-x-3 pb-3 border-b">
+                <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                  🪣
+                </div>
+                <h2 className="text-lg font-semibold text-gray-900">
+                  Bitbucket API Configuration
+                </h2>
+              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="form-group">
@@ -370,7 +429,7 @@ Do not include any text before or after the JSON. The entire response should be 
               )}
 
               <div className="bg-blue-50 p-4 rounded-md">
-                <h4 className="font-medium text-blue-900 mb-2">How to create a Bitbucket App Password:</h4>
+                <h4 className="font-medium text-blue-900 mb-2">📝 How to create a Bitbucket App Password:</h4>
                 <ol className="text-sm text-blue-800 space-y-1 ml-4 list-decimal">
                   <li>Go to Bitbucket Settings → App passwords</li>
                   <li>Click "Create app password"</li>
@@ -387,9 +446,14 @@ Do not include any text before or after the JSON. The entire response should be 
 
             {/* Review Prompt Configuration */}
             <div className="space-y-4">
-              <h2 className="text-lg font-semibold text-gray-900 border-b pb-2">
-                AI Review Prompt
-              </h2>
+              <div className="flex items-center space-x-3 pb-3 border-b">
+                <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
+                  💬
+                </div>
+                <h2 className="text-lg font-semibold text-gray-900">
+                  AI Review Prompt Template
+                </h2>
+              </div>
 
               <div className="form-group">
                 <label htmlFor="reviewPrompt" className="form-label">
@@ -420,7 +484,7 @@ Do not include any text before or after the JSON. The entire response should be 
                 onClick={resetForm}
                 className="btn-secondary"
               >
-                Reset Form
+                🔄 Reset Form
               </button>
 
               <div className="flex space-x-3">
@@ -432,15 +496,52 @@ Do not include any text before or after the JSON. The entire response should be 
                   {loading ? (
                     <>
                       <span className="spinner-sm mr-2"></span>
-                      Saving...
+                      Saving Locally...
                     </>
                   ) : (
-                    'Save Configuration'
+                    '💾 Save Configuration'
                   )}
                 </button>
               </div>
             </div>
           </form>
+        </div>
+      </div>
+
+      {/* Data Storage Information */}
+      <div className="card bg-gray-50 border-dashed border-2 border-gray-200">
+        <div className="card-body">
+          <div className="text-center space-y-4">
+            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
+              💾
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Local Data Storage Details
+              </h3>
+              <div className="grid md:grid-cols-3 gap-4 text-sm text-gray-600">
+                <div className="space-y-2">
+                  <div className="font-medium text-gray-800">🗂️ Storage Technology</div>
+                  <p>IndexedDB (Browser Database)</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="font-medium text-gray-800">🌐 Data Location</div>
+                  <p>Your Computer Only</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="font-medium text-gray-800">🔐 Access Control</div>
+                  <p>Only This Browser Tab</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white p-4 rounded-lg border text-left">
+              <h4 className="font-medium text-gray-900 mb-2">🗑️ To Clear All Configuration Data:</h4>
+              <p className="text-sm text-gray-600">
+                Open browser Developer Tools → Application → Storage → IndexedDB → 
+                Delete "AI-Code-Reviewer" database, or use browser's "Clear browsing data" option.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
