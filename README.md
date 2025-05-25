@@ -1,5 +1,7 @@
 # Bitbucket AI Code Review WebApp
 
+🚀 **Ready to use**: https://namnq.github.io/free-ai-bitbucket-reviewer
+
 ## 📖 Overview
 This is a pure frontend web application that automatically reviews Pull Requests (PRs) on Bitbucket using the Bitbucket API and an LLM (Gemini Flash). All processing and data storage occur directly in the browser (IndexedDB) without any backend server.
 
